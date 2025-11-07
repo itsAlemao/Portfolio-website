@@ -1,0 +1,263 @@
+@page "/"
+@layout MainLayout
+
+@using PortfolioWebsite.Components.Utils.Javascript
+@using PortfolioWebsite.Extensions
+
+@implements IDisposable
+@inject IScrollInfoService scrollInfoService
+@inject IJSRuntime JS
+
+
+
+<div class="@_sectionClasses lighter-bg @(_sloganVisible ? "" : "opacity-0")" 
+     style="height: @(_innerHeight + "px"); background-image: images/blueBgImage.png"
+     id="introduction">
+
+    <div class="d-flex flex-column text-center align-items-center">
+    
+        <span class="slogan" style="margin-bottom: 2em">Alessio's Space</span>
+
+        <div class="d-flex flex-column flex-lg-row justify-content-center text-center gap-4 px-5 @(_keywordsVisible ? "" : "off-screen")">
+            <span class="keyword">Web Applications</span>
+            <span class="keyword">Graphic Design</span>
+            <span class="keyword">System Integration</span>
+        </div>
+    </div>
+
+</div>
+
+<div 
+    id="@(DivStates.Count == 0 ? "" : DivStates.ElementAt(0).ComponentId)" 
+    class="
+        lighter-bg w-100 @_sectionClasses
+        @(DivStates.Count == 0 ? "" : DivStates.ElementAt(0).CssClass)">
+
+    <div class="row align-items-center py-4 px-4">
+        <div class="col-12 col-md-9 d-flex flex-column">
+
+            <MudText Typo="Typo.h3" Color="Color.Primary" Class="section-title text-center my-5">Hello There!</MudText>
+            <MudText>
+                <p>My name is Alessio, I'm 23 years old and I work as a <span class="fw-bold primary-color">Full-stack Web Developer</span>.</p>
+                <p>
+                I can build all sorts of  <span class="fw-bold primary-color">Websites</span> — from presentation pages (like this one), to portfolios, blogs, 
+                booking systems, membership platforms, and even custom dashboards or web apps tailored to your business needs.
+                </p>
+            </MudText>
+
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="section-title my-3">Academic and working background</MudText>
+
+            <MudText>
+                <p>
+                    I have been attending University at <a href="https://www.unive.it/web/en/497/home" Target="_blank"><span class="fw-bold primary-color">Ca' Foscari - Venice</span></a> in the course of 
+                    Computer Science, where i could learn a lot about software developement, and i started being really confident about it.
+                </p>
+                <p>    
+                    In my studies, from the 2nd year onward, i have also been Employed in the software design company <a Href="https://www.azserve.com/" Target="_blank"><span class="fw-bold primary-color">AZServe</span></a>, an amazing company 
+                    which taught me a lot about working practices and how the real word functions.
+                </p>
+            </MudText>
+
+            
+            <MudText>
+                <p><span class="cv-border fw-bold"> You can see my full CV and experiences <a Href="/cv"><span class="fw-bold primary-color">Here</span></a></span></p>
+            </MudText>
+        </div>
+        <div class="col-md-3 d-none d-md-block">
+            <MudImage Elevation="10" class="rounded-4" Src="images/me.jpg" Fluid/>
+        </div>
+    </div>
+</div>
+
+@*
+sezione delle skills
+
+<div 
+    id="@(DivStates.IsNullOrEmpty() ? "" : DivStates.ElementAt(1).ComponentId)" 
+    class="
+    section lighter-bg skills d-flex flex-column
+    @(DivStates.IsNullOrEmpty() ? "" : DivStates.ElementAt(1).CssClass)">
+
+    <span class="title">What I Do (Skills)</span>
+    <MudText Typo="Typo.h3" Color="Color.Primary" Class="skills-title">What I Do (Skills)</MudText>
+
+    <div class="left-section">
+        <span class="title">Ciao</span>
+        <br>
+        <span class="content">io faccio questo questo e quello</span>
+    </div>
+
+    <div class="right-section d-flex flex-column">
+        <span class="title">Ciao</span>
+        <span class="content">io faccio questo questo e quello</span>
+    </div>
+
+    <MudText>
+
+        <MudText Typo="Typo.h6" Color="Color.Primary" Class="">Full-Stack Service:</MudText>
+        I take care of both the front-end design (what your users see and interact with)
+        and the back-end systems (the logic, database, and server that keep everything running smoothly).
+
+        <MudText Typo="Typo.h6" Color="Color.Primary">Authentication and Security</MudText>
+        If you are looking for building a Product that interacts with your users it's safe to say that <MudText Inline Typo="Typo.body1">Web Applications built here are secure</MudText>, 
+        the security is provided by the <MudLink Href="https://dotnet.microsoft.com/en-us/apps/aspnet" Target="_blank">ASP.NET Core technology</MudLink>,
+        which is a direct product of the <MudLink Href="https://www.microsoft.com/en-us" Target="_blank">Microsoft</MudLink> Corporation, 
+        specialized in data protection and management of web application.
+
+        <MudText Typo="Typo.h6" Color="Color.Primary">Customization</MudText>
+        Customization: Your website can include tools for custom editing and management, allowing you to update content, add new features, 
+        and make changes directly from your own interface without needing to contact a developer every time.
+
+    </MudText>
+  
+</div>
+*@
+
+<div 
+    id="@(DivStates.Count == 0 ? "" : DivStates.ElementAt(3).ComponentId)" 
+    class="
+        darker-bg @_sectionClasses
+        @(DivStates.Count == 0 ? "" : DivStates.ElementAt(3).CssClass)"
+    style="min-height: @(_innerHeight)px;">
+
+    <div class="container d-flex flex-column gap-4">
+
+        <MudText Typo="Typo.h3" Color="Color.Primary" Class="align-self-center" style="font-family: Roboto Mono;">Services</MudText> 
+   
+        <div class="row mt-md-5 mt-sm-5">     
+
+            <div class="@_serviceClasses">
+                <MudImage Src="images/fastTimeT.png" Width="120" Class="mb-3"></MudImage>
+                <MudText Color="Color.Primary" Typo="Typo.subtitle1" Inline="false" Class="fw-bold fs-5">Fast Response</MudText>
+                <MudText Typo="Typo.subtitle2" class="px-3">Work directly with the developer handling your project, having immediate responses and seamless communication</MudText>
+            </div>
+
+            <div class="@_serviceClasses">
+                <MudImage Src="images/meet.png" Width="120" Class="mb-3"></MudImage>
+                <MudText Color="Color.Primary" Typo="Typo.subtitle1" Class="fw-bold fs-5">Meets</MudText>
+                <MudText Typo="Typo.subtitle2" class="px-3">We can connect whenever you need.</MudText>            
+            </div>
+
+            <div class="@_serviceClasses">
+                <MudImage Src="images/technology2.png" Width="120" Class="mb-6"></MudImage>
+                <MudText Color="Color.Primary" Typo="Typo.subtitle1" Class="fw-bold fs-5">Up to date technologies</MudText>
+                <MudText Typo="Typo.subtitle2" class="px-3">Your project will be built with the latest tools and technologies. <MudLink>Learn more here</MudLink> </MudText>
+            </div>
+
+            <div class="@_serviceClasses">
+                <MudImage Src="images/maintenance.png" Width="120" Class="mb-3"></MudImage>
+                <MudText Color="Color.Primary" Typo="Typo.subtitle1" Class="fw-bold fs-5">Maintenance</MudText>
+                <MudText Typo="Typo.subtitle2" class="px-3">Product updates and new content are provided, even after your project is complete.</MudText>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="darker-bg d-flex flex-column @_sectionClasses contact-me" style="height: @(_innerHeight + "px")" id="contact-me-div">
+
+    <span id="contact-me-text" class="align-self-center">
+        <p>Level up your</p>
+        <p>Online Presence</p>
+    </span>
+    
+    <br>
+    <button class="btn btn-light" id="contact-me-btn">
+        <a href="mailto:alessioginelli1@gmail.com">
+            Contact Me
+        </a>
+    </button>
+</div>
+
+<div id="footer" class="d-flex align-items-center">
+
+    <span>© 2025 Ginelli Alessio. <wbr> All rights reserved.</span>
+    
+    <div class="d-flex align-items-center ml-auto">
+        <a href="https://www.instagram.com/alessio_gine" style="margin-left: auto;">
+        <img src="images/instagram.png" height="30px"/>
+        </a>
+        <a href="https://t.me/Alessio0054">
+            <img src="images/telegram.png"height="45px"/>
+        </a>
+    </div>
+</div>
+
+
+@code{
+    private List<DivState> DivStates = new List<DivState>();
+    int _innerHeight = 0;
+    bool _keywordsVisible = false;
+    bool _sloganVisible = false;
+
+    private static string _sectionClasses = "d-flex flex-column w-100 p-md-5 p-lg-5 text-align align-items-center justify-content-center";
+    private static string _serviceClasses = "col-12 col-md-6 col-lg-3 p-2 text-center my-4";
+
+    protected override void OnInitialized()
+    {
+        scrollInfoService.OnScroll += OnScroll;
+
+        int N_SEZIONI = 5;
+
+        for (int i = 0; i < N_SEZIONI; i++){
+            string id = "id_" + i;
+            DivStates.Add(new DivState(id));
+        }
+    }
+
+    public void Dispose()
+    {
+        scrollInfoService.OnScroll -= OnScroll;
+    }
+    
+
+    private void OnScroll(object? sender, int yValue)
+    {
+        int yValueBottom = yValue + _innerHeight;
+        foreach (DivState d in DivStates){
+            if (d.CssClass == "off-screen" && d.TopHeight < yValueBottom){      
+                d.CssClass = "";
+                StateHasChanged();
+            }
+        }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender){
+        if (firstRender){
+
+            _sloganVisible = true;
+            setKeywordsVisible();
+            
+
+            _innerHeight = await JS.InnerHeight();
+
+            foreach (DivState d in DivStates){
+                int? value = await scrollInfoService.GetTopYById(JS, d.ComponentId);
+                d.TopHeight = value > 0 ? value : 0;
+            }
+
+            OnScroll(null, 0); //simula uno scroll per caricare il content nella pagina
+        }
+    }
+
+    private async void setKeywordsVisible(){
+        await Task.Delay(1000);
+        _keywordsVisible = true;
+        StateHasChanged();
+    }
+
+    private class DivState
+    {
+        public string ComponentId { get; set; } = null!;
+        public string? CssClass { get; set; }
+        public int? TopHeight { get; set; }
+
+        public DivState(string componentId){
+            this.ComponentId = componentId;
+            this.CssClass = "off-screen";
+        }
+    }
+}

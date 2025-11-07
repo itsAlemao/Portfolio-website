@@ -1,0 +1,121 @@
+@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MudBlazor.Utilities
+@using PortfolioWebsite.Extensions
+@inject IScrollInfoService ScrollInfoService;
+@inject MainLayoutParams Params;
+@implements IDisposable;
+
+<MudLayout>
+    <MudAppBar Elevation="10" Color="Color.Primary" Class="@((_topbarVisible ? "visible" : "not-visible") + " " + (Params.AppBarTransition ? "transition-slide-top" : ""))">
+        <MudSpacer/>
+        <MudStack Row AlignItems="AlignItems.Center">
+            <MudNavLink Href="" Match="NavLinkMatch.All">
+                <MudText>Home</MudText>
+            </MudNavLink>
+            <MudNavLink class="m-4" href="/cv" Match="NavLinkMatch.All">
+                <MudText Inline class="text-nowrap">About me</MudText>
+            </MudNavLink>
+        </MudStack>
+        <MudSpacer/>
+    </MudAppBar>
+
+    <MudPaper Width="100%">
+            <div class="darker-bg">
+                @Body
+            </div>
+    </MudPaper>
+
+</MudLayout>
+
+@* Required *@
+<MudThemeProvider 
+    Theme="_theme"
+/>
+<MudPopoverProvider />
+
+@* Needed for dialogs *@
+<MudDialogProvider />
+
+@* Needed for snackbars *@
+<MudSnackbarProvider />
+
+
+@code{
+    
+    private MudTheme _theme = new()
+    {
+
+        Typography = new Typography() 
+        {
+            Default = new DefaultTypography()
+            {
+                @* FontFamily = new[] {"Bahnschrift"} *@
+            },
+            Button = new DefaultTypography()
+            {
+                FontFamily = new[] {"Bahnschrift"}
+            },
+            Body1 = new DefaultTypography()
+            {
+                FontFamily = new[] {"Bahnschrift"},
+                @* FontSize = "140%" *@
+            },
+            Body2 = new DefaultTypography()
+            {
+                @* FontFamily = new[] {} *@
+            }
+        },
+
+        PaletteLight = new PaletteLight()
+        {
+            Primary = Colors.Blue.Darken4,
+            
+        },
+        PaletteDark = new PaletteDark()
+        {
+            Primary = Colors.Shades.White //cancellare....
+        }
+    };
+
+    bool _topbarVisible = false;
+    private int previousYValue = 0;
+    private void OnScroll(object? sender, int yValue)
+    {
+        bool previousTopBarVisible = _topbarVisible;
+
+        @* Console.WriteLine($"{previousYValue} -> {yValue}"); *@
+        _topbarVisible = yValue < previousYValue;
+        previousYValue = yValue;
+        if (previousTopBarVisible != _topbarVisible){
+            StateHasChanged();
+        }
+
+    }
+
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Task.Delay(Params.AppBarLoadTime);
+            _topbarVisible = true;
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        ScrollInfoService.OnScroll += OnScroll;
+    } 
+
+    public void Dispose()
+    {
+        ScrollInfoService.OnScroll += OnScroll;
+    }
+
+    
+
+}
+
+

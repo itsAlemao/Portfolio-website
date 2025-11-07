@@ -1,0 +1,40 @@
+html{
+    --primary-color: rgba(13, 71, 161, 1);
+    --primary-color-dark: rgba(17, 53, 107, 1);
+}
+
+:root{
+    font-size: 110%;
+}
+
+.transition{
+    transition: opacity 1.5s ease;
+}
+
+.transition-slide-top{
+    transition: transform 0.5s ease;
+}
+.transition-slide-top.visible{
+    transform: translateY(0);
+}
+
+.transition-slide-top.not-visible{
+    transform: translateY(-100%);
+}
+
+.section-title {
+    font-family: "Bahnschrift semibold";
+}
+
+.darker-bg{
+    background-color: #d1d1ce;
+}
+
+.lighter-bg{
+    background-color: #F9F5F0;
+}
+
+.primary-color{
+    color: var(--primary-color);
+}
+

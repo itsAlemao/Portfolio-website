@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
+
+    @* MudBlazor imports *@
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="@Assets["_content/MudBlazor/MudBlazor.min.css"]" rel="stylesheet" />
+
+    <link rel="stylesheet" href="@Assets["app.css"]" />
+    <link rel="stylesheet" href="@Assets["PortfolioWebsite.styles.css"]" />
+    <link rel="stylesheet" href="rootStyles.css"
+    <ImportMap />
+    <link rel="icon" type="image/png" href="wwwroot/favicon.png" />
+    <HeadOutlet />
+
+    @* fonts *@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <Routes @rendermode=InteractiveServer/>
+    <script src="_framework/blazor.web.js"></script>
+    <Scripts /> @* includere nuovi script qui*@
+
+        @* MudBlazor scripts *@
+    <script src="@Assets["_content/MudBlazor/MudBlazor.min.js"]"></script>
+</body>
+
+</html>

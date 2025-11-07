@@ -1,0 +1,36 @@
+@page "/cv"
+@using PortfolioWebsite.Components.Utils.Javascript
+@layout MainLayout
+@inject MainLayoutParams Params;
+@inject IJSRuntime JS
+
+
+<div style="height: @(_innerHeight)px;" id="page" class="d-flex flex-column text-center">
+    <h2 class="mt-6">Explore my journey, skills, and achievements.</h2>
+
+    <a href="/documents/CV.pdf" download>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">View Resume (PDF)</MudButton>
+    </a>
+</div>
+
+@code{
+
+    private int _innerHeight = 0;
+
+    protected override void OnInitialized()
+    {
+        Params.AppBarLoadTime = 0;
+        Params.AppBarTransition = false;
+    }
+
+    override protected async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            _innerHeight = await JS.InnerHeight();
+            StateHasChanged();
+        }
+    }
+
+
+}

@@ -1,0 +1,90 @@
+div{
+    opacity: 1;
+    transition: opacity 1.5s ease;
+    font-family: 'Roboto mono';
+    font-weight: bold;
+}
+
+#introduction{
+    background-image: url('images/blueWallpaper.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.keyword{
+    padding: 4px 13px;
+    font-size: 150%;
+    border: 2px solid black;
+    border-radius: 30px;
+    color: black;
+}
+
+.slogan{
+    font-size: 400%;
+    color: black;
+}
+
+
+div.off-screen{
+    opacity: 0;
+}
+
+
+div.img-container img{
+    width: 100%;
+    position: absolute;
+}
+
+
+div.img-container .btn-overlay{
+    background-color: rgb(205, 64, 165);
+    right: 50%;
+    left: 50%;
+    font-size: 5em;
+}
+
+.services-title{
+    font-size: 120%;
+    font-weight: 200;
+}
+
+#contact-me-div{
+    background-image: url('images/blueBgImage.png');
+    background-size: cover;
+    background-position: center;
+    
+}
+
+#contact-me-text{
+    color: white;
+    font-size: 400%;
+    text-align: center;
+}
+
+#contact-me-btn{
+    transition: all 0.2s ease;
+    transition: color 2s ease;
+    font-size: 170%;
+    color: black;
+    font-weight: bold;
+
+}
+
+#contact-me-btn:hover{
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    font-size: 185%;
+}
+
+#footer{
+    padding: 1em;
+    background-color: black;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: lighter;
+}
+
+.cv-border{
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px;
+}
